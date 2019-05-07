@@ -9,17 +9,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import id.test.kostbenhil.BaseAdapter
 
 import id.test.kostbenhil.R
 import id.test.kostbenhil.model.Penyewa
 import id.test.kostbenhil.model.StatusResponse
 import id.test.kostbenhil.shared.supportclasses.EndlessRecyclerOnScrollListener
 import kotlinx.android.synthetic.main.fragment_penyewa.view.*
-import kotlinx.android.synthetic.main.layout_list_penyewa.*
 import kotlinx.android.synthetic.main.layout_list_penyewa.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class PenyewaFragment : Fragment(), PenyewaInterface, View.OnClickListener  {
@@ -58,7 +54,6 @@ class PenyewaFragment : Fragment(), PenyewaInterface, View.OnClickListener  {
             override fun onLoadMore(current_page: Int) {
                 if (!isLoadingNextPage) {
                     if (!viewContainer.rvListTenant.isComputingLayout)
-//                        tenantAdapter.showLoading()
                     presenter!!.listTenant(current_page)
                     isLoadingNextPage = true
                 }
@@ -100,43 +95,6 @@ class PenyewaFragment : Fragment(), PenyewaInterface, View.OnClickListener  {
             viewContainer.rvListTenant.layoutManager = LinearLayoutManager(context as Activity)
             this.tenantAdapter = TenantAdapter(context as Activity, arrTenant)
             viewContainer.rvListTenant.adapter = this.tenantAdapter
-//            if (endlessRecyclerOnScrollListener.getCurrent_page() == 0) {
-//                tenantAdapter = TenantAdapter(context as Activity, penyewa)
-//                tenantAdapter = TenantAdapter(activity as Context,
-//                    penyewa.listAccountHistoryDetails,
-//                    object : BaseAdapter.OnItemClickListener {
-//                        override fun onItemClick(view: View, position: Int) {
-//                            val accountHistoryDetails = accountHistory.listAccountHistoryDetails[position]
-//                            val billerPayment = BillerPayment()
-//                            billerPayment.transactionNumber = accountHistoryDetails.transactionNumber
-//                            billerPayment.traceNumber = accountHistoryDetails.traceNumber
-//                            val serviceDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
-//                            val date = serviceDateFormat.parse(accountHistoryDetails.dateString)
-//                            val dateFormatToShow = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US)
-//                            val dateToShow = dateFormatToShow.format(date)
-//                            billerPayment.transactionDate = dateToShow
-//                            billerPayment.transactionStatus = accountHistoryDetails.status
-//                            billerPayment.description = accountHistoryDetails.fields
-//                            billerPayment.isNeedReceiptInquiry = accountHistoryDetails.needReceiptInquiry
-//                            billerPayment.type = accountHistoryDetails.type
-//                            startActivity(PurchaseView.newIntent(activity as Context, billerPayment, false))
-//                        }
-//                    })
-//                viewContainer.rvListTenant.adapter = tenantAdapter
-//                viewContainer.lblTransactionHistory.setVisible(accountHistory.listAccountHistoryDetails.size > 0 || isSetFilter)
-//                viewContainer.btnFilterTransaction.setVisible(accountHistory.listAccountHistoryDetails.size > 0 || isSetFilter)
-//                viewContainer.rvListTenant.setVisible(accountHistory.listAccountHistoryDetails.size > 0)
-//                viewContainer.constNoHistoryTransaction.setVisible(accountHistory.listAccountHistoryDetails.size == 0)
-//                viewContainer.divider.setVisible(accountHistory.listAccountHistoryDetails.size > 0)
-
-//            } else {
-//                tenantAdapter.hideLoading()
-//                for (i in 0 until accountHistory.listAccountHistoryDetails.size) {
-//                    val accountHistoryDetails = accountHistory.listAccountHistoryDetails[i]
-//                    historyTransactionAdapter.add(accountHistoryDetails)
-//                }
-//            }
-//            if (accountHistory.listAccountHistoryDetails.size == 10 /* page size 10 */) isLoadingNextPage = false
             onFinishProgress()
         }
     }
